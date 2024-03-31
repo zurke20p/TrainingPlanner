@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import { User } from '../interfaces/user';
+
+import { ServerRequestService } from '../services/server-request.service';
 
 @Component({
   selector: 'app-register',
@@ -9,18 +13,26 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './register.component.css'
 })
 
-export class RegisterComponent 
+export class RegisterComponent
 {
+  http = inject(ServerRequestService)
+
   applyForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
     mail: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)])
   });
 
-  submitForm() {
-    console.log(this.applyForm.valid);
-    console.log(this.applyForm.value.name);
-    console.log(this.applyForm.value.mail);
-    console.log(this.applyForm.value.password);
+  async submitForm() {
+    // if(!this.applyForm.valid)
+    //   return;
+
+    const user: User = {
+      username: this.applyForm.value.name as string,
+      mail: this.applyForm.value.mail as string,
+      password: this.applyForm.value.password as string
+    }
+    
+    console.log(await this.http.register(user));
   }
 }
