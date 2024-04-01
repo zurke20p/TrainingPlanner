@@ -7,11 +7,7 @@ const cors = require("cors");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-const validator = require("email-validator");
-const jwt = require("jsonwebtoken");
-
-const userFunctions = require('./functions/user');
-const userModel = require('./mongoSchemas/userSchema');
+const fs = require("fs");
 
 const app = express();
 
@@ -26,48 +22,12 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors(corsOptions));
 
-app.post("/register", async (req, res) =>
+const routeFiles = fs.readdirSync(`./routes/`).filter(file => file.endsWith('.js'));
+for (const file of routeFiles)
 {
-    if(!req.body.username || !req.body.mail || !req.body.password)
-        return res.json({ status: 'err', code: 0 });
-    if(!validator.validate(req.body.mail))
-        return res.json({ status: 'err', code: 1 });
-    if(req.body.username.length < 4 || req.body.username.length > 10)
-        return res.json({ status: 'err', code: 2 });
-    if(req.body.password.length < 3 || req.body.password.length > 10)
-        return res.json({ status: 'err', code: 3 });
-
-    if(await userFunctions.exists({ username: req.body.username }))
-        return res.json({ status: 'err', code: 4 });
-    
-    const model = await userModel.create(userFunctions.createUser(parseInt(Date.now()), req.body.username, req.body.mail, req.body.password));
-    model.save();
-
-    return res.json({ status: 'ok', code: 0 });
-});
-app.post("/login", async (req, res) =>
-{
-    console.log(req.cookies['jwt']);
-
-    if(!req.body.username || !req.body.password)
-        return res.json({ status: 'err', code: 0 });
-
-    if(!await userFunctions.exists({ username: req.body.username }))
-        return res.json({ status: 'err', code: 1 });
-    
-    const user = await userFunctions.getUser({ username: req.body.username });
-    
-    if(user.password != req.body.password)
-        return res.json({ status: 'err', code: 2 });
-   
-    const token = jwt.sign({ id: user.userID }, process.env.JWT_SECRET);
-    res.cookie('jwt', token, {
-        httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000
-    });
-        
-    return res.json({ status: 'ok', code: 0 });
-});
+    const route = require(`./routes/${file}`);
+    route(app);
+}
 
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGODB_SRV)
