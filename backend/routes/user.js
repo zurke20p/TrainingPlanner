@@ -107,7 +107,6 @@ Your Best personal Gym Trainer!!!`;
         return res.json({ status: 'ok', msg: 0 });
     });
     app.get('/register/tokens/:token', async (req, res) => {
-        console.log(tokens)
         if(!tokens.some(token => token == req.params.token))
             return res.send("err");
 
