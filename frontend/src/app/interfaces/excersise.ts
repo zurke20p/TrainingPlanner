@@ -4,4 +4,6 @@ export interface Excersise {
     type: string;
     equipment: Array<string>;
     visibility: string;
+    videoTimeStamp: string;
+    videoLink: string;
 }

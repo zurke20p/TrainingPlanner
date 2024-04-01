@@ -45,6 +45,8 @@ export class ExcersisesComponent implements OnInit {
     type: new FormControl('', [Validators.required]),
     equipment: new FormArray(this.checkboxes.map(el => new FormControl(false))),
     visibility: new FormControl('public'),
+    videoTimeStamp: new FormControl(''),
+    videoLink: new FormControl(''),
   });
   
   async submitForm(): Promise<void> {
@@ -62,6 +64,8 @@ export class ExcersisesComponent implements OnInit {
       type: this.excersiseForm.value.type as string,
       equipment: arr,
       visibility: this.excersiseForm.value.visibility as string,
+      videoTimeStamp: this.excersiseForm.value.videoTimeStamp as string,
+      videoLink: this.excersiseForm.value.videoLink as string,
     }
 
     console.log(await this.http.addExcersise(excersise));
