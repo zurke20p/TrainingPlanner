@@ -1,0 +1,16 @@
+<app-add-excersise></app-add-excersise>
+
+<div>
+    <div *ngFor="let excersise of excersises; let i = index">
+        <h3>{{ excersise.title }}</h3>
+        <p>{{ excersise.type }}</p>
+        <p>{{ excersise.desc }}</p>
+        <div *ngFor="let item of excersise.equipment; let i = index">
+            <p>{{ item }}</p>
+        </div>
+        <video controls *ngIf="excersise.videoType == 'link'">
+            <source src="{{ excersise.videoLink }}#t={{ excersise.videoTimeStamp }}">
+        </video>
+        <iframe *ngIf="excersise.videoType == 'yt'" width="1280" height="720" [src]="excersise.videoLink" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+</div>

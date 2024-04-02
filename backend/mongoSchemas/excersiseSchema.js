@@ -7,6 +7,7 @@ const excersiseSchema = new mongoose.Schema({
     type: { type: String, require: true, unique: false },
     equipment: { type: String, require: true, unique: false },
     visibility: { type: String, require: true, unique: false },
+    videoType: {type: String, require: true, unique: false},
     videoTimeStamp: {type: Number, require: true, unique: false},
     videoLink: {type: String, require: true, unique: false},
 });

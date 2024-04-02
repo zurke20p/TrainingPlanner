@@ -36,7 +36,7 @@ module.exports = {
     {
         const cookie = req.cookies['jwt'];
         if(!cookie) return false;
-    
+        
         const claims = jwt.verify(cookie, process.env.JWT_SECRET);
 
         if(!claims) return false;

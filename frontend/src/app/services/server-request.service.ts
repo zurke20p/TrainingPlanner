@@ -37,4 +37,8 @@ export class ServerRequestService {
   {
     return await firstValueFrom(this.http.post(`${this.link}/excersise/add`, excersise, { withCredentials: true }));
   }
+  async getExcersises(): Promise<any>
+  {
+    return await firstValueFrom(this.http.get(`${this.link}/excersise`, { withCredentials: true }));
+  }
 }

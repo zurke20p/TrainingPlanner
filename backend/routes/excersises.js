@@ -7,12 +7,21 @@ const excersiseModel = require('../mongoSchemas/excersiseSchema');
 
 module.exports = (app) =>
 {
-    app.post("/excersise/add", async (req, res) =>
+    app.get("/excersise", async (req, res) =>
     {
-        if(!userFunctions.authenticate(req))
+        if(!await userFunctions.authenticate(req))
             return res.json({ status: 'err', msg: "User is not logged in" });
 
-        if(!req.body.title || !req.body.desc || !req.body.type || !req.body.equipment || !req.body.visibility || !req.body.videoTimeStamp || !req.body.videoLink)
+        const excersises = await excersiseFunctions.getExcersises();
+    
+        return res.json({ status: 'ok', msg: excersises });
+    });
+    app.post("/excersise/add", async (req, res) =>
+    {
+        if(!await userFunctions.authenticate(req))
+            return res.json({ status: 'err', msg: "User is not logged in" });
+
+        if(!req.body.title || req.body.desc == undefined || !req.body.type || !req.body.equipment || !req.body.visibility || req.body.videoTimeStamp == undefined || req.body.videoLink == undefined)
             return res.json({ status: 'err', msg: 1 });
         
         if(await excersiseFunctions.exists({ title: req.body.title }))

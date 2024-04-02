@@ -1,28 +1,20 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
-import { ServerRequestService } from '../services/server-request.service';
+import { ServerRequestService } from '../../services/server-request.service';
 
-import { Excersise } from '../interfaces/excersise';
+import { Excersise } from '../../interfaces/excersise';
 
 @Component({
-  selector: 'app-excersises',
+  selector: 'app-add-excersise',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './excersises.component.html',
-  styleUrl: './excersises.component.css'
+  templateUrl: './add-excersise.component.html',
+  styleUrl: './add-excersise.component.css'
 })
-export class ExcersisesComponent implements OnInit {
+export class AddExcersiseComponent {
   http = inject(ServerRequestService)
-  location = inject(Location)
-
-  async ngOnInit(): Promise<void> {
-    const auth = await this.http.authentication();
-
-    if(auth.status != "ok")
-      this.location.back();
-  }
 
   checkboxes = [
     { name: "Dumbbells", value: "dumbbells" },
@@ -50,8 +42,8 @@ export class ExcersisesComponent implements OnInit {
   });
   
   async submitForm(): Promise<void> {
-    // if(!this.excersiseForm.valid)
-    //   return;
+    if(!this.excersiseForm.valid)
+      return;
     
     const arr = new Array();
     for (const [index, checkbox] of this.checkboxes.entries())
