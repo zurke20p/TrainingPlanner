@@ -7,6 +7,7 @@ const userFunctions = require('../functions/user');
 const utility = require('../functions/utility');
 
 const userModel = require('../mongoSchemas/userSchema');
+const friendRequestModel = require('../mongoSchemas/friendRequestSchema');
 
 let tokens = new Array();
 
@@ -123,5 +124,58 @@ Your Best personal Gym Trainer!!!`;
         model.save();
         return res.send("Account created successfully!!!");
     });
+    app.post("/getPotentialFriends", async (req, res) => {
+        if(!await userFunctions.authenticate(req))
+            return res.json({ status: 'err', msg: "User not logged in." });
+
+        if(!req.body.nickName)
+            return res.json({ status: 'err', msg: "No nickname was given." });
+
+        let users = await userFunctions.getUsers({ username: new RegExp(req.body.nickName, 'i') });
+        
+        // prevents user from searching themselfs
+        const cookie = req.cookies['jwt'];
+        const claims = jwt.verify(cookie, process.env.JWT_SECRET);
+        const user = await userFunctions.getUser({ userID: claims.id });
+        users = users.filter(el => el.username != user.username);
+
+        // removes users that already have sent or received invitation(I have no idea how but it works)
+        users = await users.reduce(async (acc, v) => {
+            const result = !await userFunctions.friendRequestExists(user.userID, v.userID);
+            if (!result) {
+                return acc;
+            }
+            return (await acc).concat(v);
+        }, []);
+
+        users = users.map(el => el.username);
+
+        return res.json({ status: 'ok', msg: users});
+    });
+    app.post("/sendFriendRequest", async (req, res) => {
+        if(!await userFunctions.authenticate(req))
+            return res.json({ status: 'err', msg: "User not logged in." });
+        if(!req.body.nickName)
+            return res.json({ status: 'err', msg: "No nickname was given." });
+
+        const cookie = req.cookies['jwt'];
+        const claims = jwt.verify(cookie, process.env.JWT_SECRET);
+        const sender = await userFunctions.getUser({ userID: claims.id });
+        const receiver = await userFunctions.getUser({username: req.body.nickName});
+
+        if(!receiver)
+            return res.json({ status: 'err', msg: "No matching user for receiver found" });    
+        if(sender.userID == receiver.userID)
+            return res.json({ status: 'err', msg: "Sender and receiver are the same user." });
+        if(await userFunctions.friendRequestExists(sender.userID, receiver.userID))
+            return res.json({ status: 'err', msg: "Friend request already exists." });
+
+        
+        const friendRequest = userFunctions.createFriendRequest(sender.userID, receiver.userID);
+        const model = await friendRequestModel.create(friendRequest);
+        model.save();
+
+        return res.json({ status: 'ok', msg: "success"});
+    })
 
 }

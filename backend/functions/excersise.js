@@ -35,7 +35,7 @@ module.exports = {
     createExcersise: (id, title, desc, type, equipment, visibility, videoTimeStamp, videoLink) =>
     {
         let timeStamp = 0;
-        let videoType = "link";
+        let videoType = "none";
 
         if(videoLink.includes("https://www.youtube.com/watch?v="))
         {
@@ -43,6 +43,9 @@ module.exports = {
             const replacer = videoLink.substring(videoLink.indexOf("&t="), videoLink.length);
             videoLink = `https://www.youtube.com/embed/${videoLink.replace("https://www.youtube.com/watch?v=", "").replace(replacer, "")}`;
         }
+        else if(videoLink != "")
+            videoType = "link";
+
         if(videoTimeStamp != "")
         {
             const splitted = videoTimeStamp.split(':');

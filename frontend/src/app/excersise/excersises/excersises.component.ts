@@ -35,7 +35,7 @@ export class ExcersisesComponent implements OnInit {
 
     msg.forEach((el: any) =>
     {
-      el.equipment = JSON.parse(el.equipment);
+      el.equipment = el.equipment;
       if(el.videoType == "yt")
         el.videoLink = this.sanitizer.bypassSecurityTrustResourceUrl(el.videoLink);
     });

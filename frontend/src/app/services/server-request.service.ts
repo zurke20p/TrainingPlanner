@@ -32,6 +32,16 @@ export class ServerRequestService {
     return await firstValueFrom(this.http.post(`${this.link}/logout`, {}, { withCredentials: true }));
   }
 
+  // FOR FRIENDS
+  async searchFriends(nickName : string): Promise<any>
+  {
+    return await firstValueFrom(this.http.post(`${this.link}/getPotentialFriends`, {nickName}, { withCredentials: true }));
+  }
+  async sendFriendRequest(nickName : string): Promise<any>
+  {
+    return await firstValueFrom(this.http.post(`${this.link}/sendFriendRequest`, {nickName}, { withCredentials: true }));
+  }
+
   // FOR EXCERSISES
   async addExcersise(excersise : Excersise): Promise<any>
   {
