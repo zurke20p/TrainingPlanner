@@ -41,6 +41,10 @@ export class AddExcersiseComponent {
     videoTimeStamp: new FormControl(''),
     videoLink: new FormControl(''),
   });
+
+  receiveMuscles(event: Array<object>){
+    console.log(event);
+  }
   
   async submitForm(): Promise<void> {
     if(!this.excersiseForm.valid)

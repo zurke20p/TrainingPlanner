@@ -1,6 +1,6 @@
 <form [formGroup]="muscleForm">
     <div class="form-group">
-        <label for="">Equipment</label>
+        <label for="">Muscles</label>
         <div *ngFor="let checkbox of checkboxes; let i = index" formArrayName="muscles">
             <input type="checkbox" [formControlName]="i" value="{{ checkbox.value }}" id="{{ checkbox.value }}"/>
             <label for="{{ checkbox.value }}">{{ checkbox.name }}</label>
