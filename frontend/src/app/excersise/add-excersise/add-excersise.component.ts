@@ -5,13 +5,14 @@ import { CommonModule } from '@angular/common';
 import { ServerRequestService } from '../../services/server-request.service';
 
 import { Excersise } from '../../interfaces/excersise';
+import { MuscleSchemeComponent } from "../muscle-scheme/muscle-scheme.component";
 
 @Component({
-  selector: 'app-add-excersise',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './add-excersise.component.html',
-  styleUrl: './add-excersise.component.css'
+    selector: 'app-add-excersise',
+    standalone: true,
+    templateUrl: './add-excersise.component.html',
+    styleUrl: './add-excersise.component.css',
+    imports: [ReactiveFormsModule, CommonModule, MuscleSchemeComponent]
 })
 export class AddExcersiseComponent {
   http = inject(ServerRequestService)
