@@ -15,9 +15,7 @@ export class MuscleSchemeComponent implements AfterViewInit{
   checkboxes = [
     { name: "Neck", value: "neck", checked: false},
     { name: "Shoulders-front-deltoid", value: "shoulders-front-deltoid", checked: false},
-    // { name: "Shoulders-side-deltoid", value: "shoulders-side-deltoid", checked: false},
     { name: "Shoulders-rear-deltoid", value: "shoulders-rear-deltoid", checked: false},
-    // { name: "Upper chest", value: "upper-chest", checked: false},
     { name: "Chest", value: "chest", checked: false},
     { name: "Abominals", value: "abs", checked: false},
     { name: "Obliques", value: "obliques", checked: false},

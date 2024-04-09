@@ -17,7 +17,7 @@ export class LoginComponent
   http = inject(ServerRequestService)
 
   loginForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
     password: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)])
   });
 

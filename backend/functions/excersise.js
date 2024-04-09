@@ -19,20 +19,45 @@ module.exports = {
 
         return excersise;
     },
-    validate: (type, equipment, visibility, videoTimeStamp) =>
+    validate: (type, equipment, muscle, visibility, videoTimeStamp) =>
     {
         const types = ["strength", "cardio", "stretching", "balance", "interval", "functional", "plyometric", "mobility"];
         const equipments = ["dumbbells", "machine", "kettlebells", "cables", "plate", "smith", "barbell", "bodyweight", "medBall", "stretches", "trx", "bosuBall"];
+        const muscles = [
+            "neck", 
+            "shoulders-front-deltoid", 
+            "shoulders-rear-deltoid",
+            "chest",
+            "abs",
+            "obliques",
+            "lats",
+            "traps",
+            "rotatores",
+            "spinal-erectors",
+            "biceps-short-head",
+            "biceps-long-head",
+            "triceps-lateral-head",
+            "triceps-medial-head",
+            "triceps-long-head",
+            "forearms",
+            "hands",
+            "thighs",
+            "inner-thighs",
+            "glutes",
+            "hamstrings",
+            "calves",
+            "anterior"
+        ];
         const visibilities = ["public", "private", "protected"];
-
+        
         let timeStamp = true;
 
         if(videoTimeStamp != "")
             timeStamp = (new RegExp("^([0-1]?[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$")).test(videoTimeStamp);
 
-        return types.some(el => el == type) && equipments.some(el => equipment.some(eq => eq == el)) && visibilities.some(el => el == visibility) && timeStamp;
+        return types.some(el => el == type) && equipments.some(el => equipment.some(eq => eq == el)) && muscles.some(el => muscle.some(m => m == el)) && visibilities.some(el => el == visibility) && timeStamp;
     },
-    createExcersise: (id, title, desc, type, equipment, visibility, videoTimeStamp, videoLink) =>
+    createExcersise: (id, title, desc, type, equipment, muscles, visibility, videoTimeStamp, videoLink) =>
     {
         let timeStamp = 0;
         let videoType = "link";
@@ -55,6 +80,7 @@ module.exports = {
             desc: desc,
             type: type,
             equipment: equipment,
+            muscles: muscles,
             visibility: visibility,
             videoType: videoType,
             videoTimeStamp: timeStamp,

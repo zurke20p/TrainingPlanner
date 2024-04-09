@@ -12,7 +12,7 @@ const fs = require("fs");
 const app = express();
 
 const corsOptions = {
-   origin: 'http://localhost:4200', 
+   origin: 'https://g5f6my-4200.csb.app', 
    credentials: true,
    optionSuccessStatus: 200,
 }

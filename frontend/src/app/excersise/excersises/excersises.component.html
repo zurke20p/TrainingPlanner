@@ -8,6 +8,9 @@
         <div *ngFor="let item of excersise.equipment; let i = index">
             <p>{{ item }}</p>
         </div>
+        <div *ngFor="let muscle of excersise.muscles; let i = index">
+            <p>{{ muscle }}</p>
+        </div>
         <video controls *ngIf="excersise.videoType == 'link'">
             <source src="{{ excersise.videoLink }}#t={{ excersise.videoTimeStamp }}">
         </video>
