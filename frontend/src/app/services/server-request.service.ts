@@ -12,7 +12,7 @@ import { firstValueFrom } from 'rxjs';
 export class ServerRequestService {
 
   constructor(private http: HttpClient) { }
-  link = "https://g5f6my-8000.csb.app"
+  link = "http://localhost:8000"
 
   // FOR USERS
   async register(user : User): Promise<any>
