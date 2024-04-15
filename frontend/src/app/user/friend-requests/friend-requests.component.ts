@@ -30,4 +30,9 @@ export class FriendRequestsComponent {
     this.receivedFriendRequests = [];
   }
 
+  async cancelRequest(nickName : string, sent : boolean): Promise<void>{
+    const res = await this.http.cancelFriendRequest(nickName, sent);
+    console.log(res)
+  }
+
 }

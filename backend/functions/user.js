@@ -81,6 +81,11 @@ module.exports = {
         else
             return false;
     },
+    deleteFriendRequest: async (search) => {
+        const res = await friendRequestModel.findOneAndDelete(search);
+        
+        return res;
+    },
     changeData: async (filter, data) =>
     {
         await userModel.findOneAndUpdate(

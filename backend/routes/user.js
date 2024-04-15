@@ -180,7 +180,7 @@ Your Best personal Gym Trainer!!!`;
     app.post("/getFriendRequests", async (req, res) => {
         if(!await userFunctions.authenticate(req))
             return res.json({ status: 'err', msg: "User not logged in." });
-
+        
         const cookie = req.cookies['jwt'];
         const claims = jwt.verify(cookie, process.env.JWT_SECRET);
         const user = await userFunctions.getUser({ userID: claims.id });
@@ -199,6 +199,30 @@ Your Best personal Gym Trainer!!!`;
         }));
 
         return res.json({ status: 'ok', msg: [sentFriendRequest, receivedFriendRequests]});
+    })
+    app.post("/cancelFriendRequest", async (req, res) => {
+        if(!await userFunctions.authenticate(req))
+            return res.json({ status: 'err', msg: "User not logged in." });
+        if(!req.body.nickName)
+            return res.json({ status: 'err', msg: "No nickname was given." });
+        if(!("sent" in req.body))
+            return res.json({ status: 'err', msg: "No information about sender was given." });
+
+        const cookie = req.cookies['jwt'];
+        const claims = jwt.verify(cookie, process.env.JWT_SECRET);
+        const user = await userFunctions.getUser({ userID: claims.id });
+
+        const user2 = await userFunctions.getUser({username: req.body.nickName});
+        if(!user2)
+            return res.json({ status: 'err', msg: "No matching user for given nickname." });  
+
+        let requestDeleted = await userFunctions.deleteFriendRequest({senderID : req.body.sent ? user.userID : user2.userID, receiverID : req.body.sent ? user2.userID : user.userID});
+
+        if(!requestDeleted)
+            return res.json({ status: 'err', msg: "Couldn't find matching friend request." });  
+        
+
+        return res.json({ status: 'ok', msg: "Friend request successfully deleted."});
     })
 
 }

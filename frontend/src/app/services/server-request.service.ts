@@ -45,6 +45,10 @@ export class ServerRequestService {
   {
     return await firstValueFrom(this.http.post(`${this.link}/getFriendRequests`, {}, { withCredentials: true }));
   }
+  async cancelFriendRequest(nickName : string, sent: boolean): Promise<any>
+  {
+    return await firstValueFrom(this.http.post(`${this.link}/cancelFriendRequest`, {nickName, sent}, { withCredentials: true }));
+  }
 
   // FOR EXCERSISES
   async addExcersise(excersise : Excersise): Promise<any>
