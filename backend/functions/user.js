@@ -63,6 +63,24 @@ module.exports = {
         else
             return false;
     },
+    getReceivedFriendRequests: async (userID) => {
+        const res = await friendRequestModel.find({
+            receiverID: userID
+        });
+        if(res)
+            return res;
+        else
+            return false;
+    },
+    getSentFriendRequests: async (userID) => {
+        const res = await friendRequestModel.find({
+            senderID: userID
+        });
+        if(res)
+            return res;
+        else
+            return false;
+    },
     changeData: async (filter, data) =>
     {
         await userModel.findOneAndUpdate(

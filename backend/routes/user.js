@@ -177,5 +177,28 @@ Your Best personal Gym Trainer!!!`;
 
         return res.json({ status: 'ok', msg: "success"});
     })
+    app.post("/getFriendRequests", async (req, res) => {
+        if(!await userFunctions.authenticate(req))
+            return res.json({ status: 'err', msg: "User not logged in." });
+
+        const cookie = req.cookies['jwt'];
+        const claims = jwt.verify(cookie, process.env.JWT_SECRET);
+        const user = await userFunctions.getUser({ userID: claims.id });
+
+        let sentFriendRequest = await userFunctions.getSentFriendRequests(user.userID);
+        let receivedFriendRequests = await userFunctions.getReceivedFriendRequests(user.userID);
+
+        sentFriendRequest = await Promise.all(sentFriendRequest.map(async (el) =>  {
+            el = await userFunctions.getUser({ userID: el.receiverID });
+            return el.username;
+        }));
+
+        receivedFriendRequests = await Promise.all(receivedFriendRequests.map(async (el) =>  {
+            el = await userFunctions.getUser({ userID: el.senderID });
+            return el.username;
+        }));
+
+        return res.json({ status: 'ok', msg: [sentFriendRequest, receivedFriendRequests]});
+    })
 
 }
