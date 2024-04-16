@@ -148,6 +148,8 @@ Your Best personal Gym Trainer!!!`;
             return (await acc).concat(v);
         }, []);
 
+        users = users.filter(el => el.userID in user.friends);
+
         users = users.map(el => el.username);
 
         return res.json({ status: 'ok', msg: users});

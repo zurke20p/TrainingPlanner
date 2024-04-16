@@ -35,7 +35,6 @@ export class FriendRequestsComponent {
     console.log(res)
   }
   async acceptRequest(nickName : string): Promise<void>{
-    console.log("ss")
     const res = await this.http.acceptFriendRequest(nickName);
     console.log(res)
   }
