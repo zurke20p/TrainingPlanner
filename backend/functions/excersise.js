@@ -55,6 +55,7 @@ module.exports = {
             desc: desc,
             type: type,
             equipment: equipment,
+            muscles: muscles,
             visibility: visibility,
             videoType: videoType,
             videoTimeStamp: timeStamp,

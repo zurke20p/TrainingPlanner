@@ -16,7 +16,7 @@ module.exports = (app) =>
     {
         if(req.cookies["emailSent"])
             return res.json({ status: 'err', msg: 0 });
-        if(await userFunctions.authenticate(req))
+        if(await utility.authenticate(req))
             return res.json({ status: 'err', msg: "User is already logged in" });
         if(!req.body.username || !req.body.mail || !req.body.password)
             return res.json({ status: 'err', msg: 2 });
@@ -62,7 +62,7 @@ Your Best personal Gym Trainer!!!`;
     });
     app.post("/login", async (req, res) =>
     {
-        if(await userFunctions.authenticate(req))
+        if(await utility.authenticate(req))
             return res.json({ status: 'err', msg: "User is already logged in." });
         if(!req.body.username || !req.body.password)
             return res.json({ status: 'err', msg: 0 });
@@ -85,7 +85,7 @@ Your Best personal Gym Trainer!!!`;
     });
     app.get("/user/authenticate", async (req, res) =>
     {
-        if(!await userFunctions.authenticate(req))
+        if(!await utility.authenticate(req))
             return res.json({ status: 'err', msg: 0 });
 
         const cookie = req.cookies['jwt'];
@@ -99,7 +99,7 @@ Your Best personal Gym Trainer!!!`;
     });
     app.post("/logout", async (req, res) =>
     {
-        if(!await userFunctions.authenticate(req))
+        if(!await utility.authenticate(req))
             return res.json({ status: 'err', msg: 0 });
 
         res.cookie('jwt', '', { maxAge: 0 });

@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 
 module.exports = {
@@ -29,5 +30,16 @@ module.exports = {
 
             return false;
         }
-    }
+    },
+    authenticate: async (req, name = 'jwt') =>
+    {
+        const cookie = req.cookies[name];
+        if(!cookie) return false;
+        
+        const claims = jwt.verify(cookie, process.env.JWT_SECRET);
+
+        if(!claims) return false;
+        
+        return true;
+    },
 }
