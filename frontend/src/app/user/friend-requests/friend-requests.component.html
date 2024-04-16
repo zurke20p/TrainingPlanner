@@ -23,7 +23,7 @@
         <ul *ngFor="let nickName of this.receivedFriendRequests">
             <li>
                 <p>{{nickName}}</p> 
-                <input type="button" value="Cancel" (click)="cancelRequest(nickName, false)"> 
+                <input type="button" value="Reject" (click)="cancelRequest(nickName, false)"> 
                 <input type="button" value="Accept" (click)="acceptRequest(nickName)">
             </li>
         </ul>

@@ -33,10 +33,29 @@ export class FriendRequestsComponent {
   async cancelRequest(nickName : string, sent : boolean): Promise<void>{
     const res = await this.http.cancelFriendRequest(nickName, sent);
     console.log(res)
+
+    if(res.status == "ok"){
+      let index = this.sentFriendRequests.indexOf(nickName);
+      if (index !== -1) {
+        this.sentFriendRequests.splice(index, 1);
+      }
+
+      index = this.receivedFriendRequests.indexOf(nickName);
+      if (index !== -1) {
+        this.receivedFriendRequests.splice(index, 1);
+      }
+    }
   }
   async acceptRequest(nickName : string): Promise<void>{
     const res = await this.http.acceptFriendRequest(nickName);
     console.log(res)
+
+    if(res.status == "ok"){
+      let index = this.receivedFriendRequests.indexOf(nickName);
+      if (index !== -1) {
+        this.receivedFriendRequests.splice(index, 1);
+      }
+    }
   }
 
 }

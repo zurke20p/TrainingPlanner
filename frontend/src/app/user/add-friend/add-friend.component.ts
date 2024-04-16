@@ -22,12 +22,13 @@ export class AddFriendComponent {
 
   async submitForm(): Promise<void> {
     const res = await this.http.searchFriends(this.searchForm.value.nickName as string);
-
+    console.log(res)
     if(res.status == "err")
       this.potentialFriendList = [];
     else
       this.potentialFriendList = res.msg;
   }
+  
   async sendFriendRequest(nickName : string): Promise<void>{
     const res = await this.http.sendFriendRequest(nickName as string);
     console.log(res)
