@@ -224,5 +224,31 @@ Your Best personal Gym Trainer!!!`;
 
         return res.json({ status: 'ok', msg: "Friend request successfully deleted."});
     })
+    app.post("/acceptFriendRequest", async (req, res) => {
+        if(!await userFunctions.authenticate(req))
+            return res.json({ status: 'err', msg: "User not logged in." });
+        if(!req.body.nickName)
+            return res.json({ status: 'err', msg: "No nickname was given." });
+
+        const cookie = req.cookies['jwt'];
+        const claims = jwt.verify(cookie, process.env.JWT_SECRET);
+        const user = await userFunctions.getUser({ userID: claims.id });
+
+        const sender = await userFunctions.getUser({username: req.body.nickName});
+        if(!sender)
+            return res.json({ status: 'err', msg: "No matching user for given nickname." });  
+
+        let requestDeleted = await userFunctions.deleteFriendRequest({senderID : sender.userID, receiverID : user.userID});
+        if(!requestDeleted)
+            return res.json({ status: 'err', msg: "Couldn't find matching friend request." });  
+        
+        user.friends.push(sender.userID);
+        sender.friends.push(user.userID);
+
+        userFunctions.changeData({userID: user.userID}, {friends: user.friends})
+        userFunctions.changeData({userID: sender.userID}, {friends: sender.friends})
+
+        return res.json({ status: 'ok', msg: "Friend request successfully accepted."});
+    })
 
 }

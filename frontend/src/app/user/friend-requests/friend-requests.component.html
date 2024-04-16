@@ -24,7 +24,7 @@
             <li>
                 <p>{{nickName}}</p> 
                 <input type="button" value="Cancel" (click)="cancelRequest(nickName, false)"> 
-                <input type="button" value="Accept">
+                <input type="button" value="Accept" (click)="acceptRequest(nickName)">
             </li>
         </ul>
     </ng-container>

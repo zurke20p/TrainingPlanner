@@ -34,5 +34,10 @@ export class FriendRequestsComponent {
     const res = await this.http.cancelFriendRequest(nickName, sent);
     console.log(res)
   }
+  async acceptRequest(nickName : string): Promise<void>{
+    console.log("ss")
+    const res = await this.http.acceptFriendRequest(nickName);
+    console.log(res)
+  }
 
 }
