@@ -63,4 +63,14 @@ export class ServerRequestService {
   {
     return await firstValueFrom(this.http.get(`${this.link}/excersise`, { withCredentials: true }));
   }
+
+  // FOR ADMIN
+  async loginAdmin(object : any): Promise<any>
+  {
+    return await firstValueFrom(this.http.post(`${this.link}/admin/login`, object, { withCredentials: true }));
+  }
+  async adminAuthentication(): Promise<any>
+  {
+    return await firstValueFrom(this.http.get(`${this.link}/admin/authenticate`, { withCredentials: true }));
+  }
 }

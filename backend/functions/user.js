@@ -92,16 +92,4 @@ module.exports = {
             filter, 
             { $set: data });
     },
-    authenticate: async (req) =>
-    {
-        const cookie = req.cookies['jwt'];
-        if(!cookie) return false;
-        
-        const claims = jwt.verify(cookie, process.env.JWT_SECRET);
-
-        if(!claims) return false;
-    
-        return true;
-    },
-
 }

@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const userFunctions = require('../functions/user');
 const excersiseFunctions = require('../functions/excersise');
+const utility = require('../functions/utility');
 
 const excersiseModel = require('../mongoSchemas/excersiseSchema');
 
@@ -9,7 +10,7 @@ module.exports = (app) =>
 {
     app.get("/excersise", async (req, res) =>
     {
-        if(!await userFunctions.authenticate(req))
+        if(!await utility.authenticate(req))
             return res.json({ status: 'err', msg: "User is not logged in" });
 
         const excersises = await excersiseFunctions.getExcersises();
@@ -18,7 +19,7 @@ module.exports = (app) =>
     });
     app.post("/excersise/add", async (req, res) =>
     {
-        if(!await userFunctions.authenticate(req))
+        if(!await utility.authenticate(req))
             return res.json({ status: 'err', msg: "User is not logged in" });
 
         if(!req.body.title || req.body.desc == undefined || !req.body.type || !req.body.equipment || !req.body.muscles ||!req.body.visibility || req.body.videoTimeStamp == undefined || req.body.videoLink == undefined)
