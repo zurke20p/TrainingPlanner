@@ -30,7 +30,7 @@ module.exports = (app) =>
         if(!excersiseFunctions.validate(req.body.type, req.body.equipment, req.body.muscles, req.body.visibility, req.body.videoTimeStamp))
             return res.json({ status: 'err', msg: 3 });
     
-        const model = await excersiseModel.create(excersiseFunctions.createExcersise(parseInt(Date.now()), req.body.title, req.body.desc, req.body.type, JSON.stringify(req.body.equipment), req.body.muscles, req.body.visibility, req.body.videoTimeStamp, req.body.videoLink));
+        const model = await excersiseModel.create(excersiseFunctions.createExcersise(parseInt(Date.now()), req.body.title, req.body.desc, req.body.type, req.body.equipment, req.body.muscles, req.body.visibility, req.body.videoTimeStamp, req.body.videoLink));
         model.save();
     
         return res.json({ status: 'ok', msg: 0 });

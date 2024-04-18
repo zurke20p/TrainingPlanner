@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ServerRequestService } from './services/server-request.service';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  
+  http = inject(ServerRequestService);
+  async logout(){
+    const res = await this.http.logout();
+    console.log(res)
+  }
 }
