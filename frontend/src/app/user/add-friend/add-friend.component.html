@@ -1,0 +1,14 @@
+<form [formGroup]="searchForm" (ngSubmit)="submitForm()">
+    <h3>Find new friends</h3>
+    <div class="form-group">
+        <label for="">Search by nickname</label>
+        <input type="text" formControlName="nickName">
+    </div>
+    <button type="submit">SEARCH</button>
+</form>
+
+<ng-container *ngIf="potentialFriendList.length != 0">
+    <ul *ngFor="let personNickName of potentialFriendList">
+        <li>{{personNickName}} <button (click)="sendFriendRequest(personNickName)">Add Friend</button></li>
+    </ul>
+</ng-container>

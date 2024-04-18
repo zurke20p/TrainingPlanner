@@ -32,6 +32,28 @@ export class ServerRequestService {
     return await firstValueFrom(this.http.post(`${this.link}/logout`, {}, { withCredentials: true }));
   }
 
+  // FOR FRIENDS
+  async searchFriends(nickName : string): Promise<any>
+  {
+    return await firstValueFrom(this.http.post(`${this.link}/getPotentialFriends`, {nickName}, { withCredentials: true }));
+  }
+  async sendFriendRequest(nickName : string): Promise<any>
+  {
+    return await firstValueFrom(this.http.post(`${this.link}/sendFriendRequest`, {nickName}, { withCredentials: true }));
+  }
+  async getFriendRequests(): Promise<any>
+  {
+    return await firstValueFrom(this.http.post(`${this.link}/getFriendRequests`, {}, { withCredentials: true }));
+  }
+  async cancelFriendRequest(nickName : string, sent: boolean): Promise<any>
+  {
+    return await firstValueFrom(this.http.post(`${this.link}/cancelFriendRequest`, {nickName, sent}, { withCredentials: true }));
+  }
+  async acceptFriendRequest(nickName : string): Promise<any>
+  {
+    return await firstValueFrom(this.http.post(`${this.link}/acceptFriendRequest`, {nickName}, { withCredentials: true }));
+  }
+
   // FOR EXCERSISES
   async addExcersise(excersise : Excersise): Promise<any>
   {

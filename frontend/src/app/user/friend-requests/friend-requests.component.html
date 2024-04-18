@@ -1,0 +1,31 @@
+
+<ng-container  *ngIf="!this.displayrequests">
+    <input type="button" value="Show friend requests" (click)="showRequests()"/>
+</ng-container>
+
+<ng-container *ngIf="this.displayrequests">
+    <input type="button" value="Hide friend requests" (click)="hideRequests()"/>
+
+    <h2>Sent Friend Requests</h2>
+    <h3 *ngIf="this.sentFriendRequests.length == 0">No friend requests sent</h3>
+    <ng-container *ngIf="this.sentFriendRequests.length != 0">
+        <ul *ngFor="let nickName of this.sentFriendRequests">
+            <li>
+                <p>{{nickName}}</p> 
+                <input type="button" value="Cancel" (click)="cancelRequest(nickName, true)">
+            </li>
+        </ul>
+    </ng-container>
+
+    <h2>Received Friend Requests</h2>
+    <h3 *ngIf="this.receivedFriendRequests.length == 0">No friend requests received</h3>
+    <ng-container *ngIf="this.receivedFriendRequests.length != 0">
+        <ul *ngFor="let nickName of this.receivedFriendRequests">
+            <li>
+                <p>{{nickName}}</p> 
+                <input type="button" value="Reject" (click)="cancelRequest(nickName, false)"> 
+                <input type="button" value="Accept" (click)="acceptRequest(nickName)">
+            </li>
+        </ul>
+    </ng-container>
+</ng-container>
