@@ -125,7 +125,7 @@ Your Best personal Gym Trainer!!!`;
         return res.send("Account created successfully!!!");
     });
     app.post("/getPotentialFriends", async (req, res) => {
-        if(!await userFunctions.authenticate(req))
+        if(!await utility.authenticate(req))
             return res.json({ status: 'err', msg: "User not logged in." });
 
         if(!req.body.nickName)
@@ -155,7 +155,7 @@ Your Best personal Gym Trainer!!!`;
         return res.json({ status: 'ok', msg: users});
     });
     app.post("/sendFriendRequest", async (req, res) => {
-        if(!await userFunctions.authenticate(req))
+        if(!await utility.authenticate(req))
             return res.json({ status: 'err', msg: "User not logged in." });
         if(!req.body.nickName)
             return res.json({ status: 'err', msg: "No nickname was given." });
@@ -180,7 +180,7 @@ Your Best personal Gym Trainer!!!`;
         return res.json({ status: 'ok', msg: "success"});
     })
     app.post("/getFriendRequests", async (req, res) => {
-        if(!await userFunctions.authenticate(req))
+        if(!await utility.authenticate(req))
             return res.json({ status: 'err', msg: "User not logged in." });
         
         const cookie = req.cookies['jwt'];
@@ -203,7 +203,7 @@ Your Best personal Gym Trainer!!!`;
         return res.json({ status: 'ok', msg: [sentFriendRequest, receivedFriendRequests]});
     })
     app.post("/cancelFriendRequest", async (req, res) => {
-        if(!await userFunctions.authenticate(req))
+        if(!await utility.authenticate(req))
             return res.json({ status: 'err', msg: "User not logged in." });
         if(!req.body.nickName)
             return res.json({ status: 'err', msg: "No nickname was given." });
@@ -227,7 +227,7 @@ Your Best personal Gym Trainer!!!`;
         return res.json({ status: 'ok', msg: "Friend request successfully deleted."});
     })
     app.post("/acceptFriendRequest", async (req, res) => {
-        if(!await userFunctions.authenticate(req))
+        if(!await utility.authenticate(req))
             return res.json({ status: 'err', msg: "User not logged in." });
         if(!req.body.nickName)
             return res.json({ status: 'err', msg: "No nickname was given." });
