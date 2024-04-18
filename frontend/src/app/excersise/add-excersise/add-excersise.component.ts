@@ -5,13 +5,14 @@ import { CommonModule } from '@angular/common';
 import { ServerRequestService } from '../../services/server-request.service';
 
 import { Excersise } from '../../interfaces/excersise';
+import { MuscleSchemeComponent } from "../muscle-scheme/muscle-scheme.component";
 
 @Component({
-  selector: 'app-add-excersise',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './add-excersise.component.html',
-  styleUrl: './add-excersise.component.css'
+    selector: 'app-add-excersise',
+    standalone: true,
+    templateUrl: './add-excersise.component.html',
+    styleUrl: './add-excersise.component.css',
+    imports: [ReactiveFormsModule, CommonModule, MuscleSchemeComponent]
 })
 export class AddExcersiseComponent {
   http = inject(ServerRequestService)
@@ -40,6 +41,12 @@ export class AddExcersiseComponent {
     videoTimeStamp: new FormControl(''),
     videoLink: new FormControl(''),
   });
+
+  muscles = new MuscleSchemeComponent().checkboxes
+
+  receiveMuscles(event: any){
+    this.muscles = event;
+  }
   
   async submitForm(): Promise<void> {
     if(!this.excersiseForm.valid)
@@ -49,12 +56,18 @@ export class AddExcersiseComponent {
     for (const [index, checkbox] of this.checkboxes.entries())
       if(this.excersiseForm.value.equipment![index])
         arr.push(checkbox.value);
+      
+    const musc = new Array();
+    for (const [index, muscle] of this.muscles.entries())
+      if(muscle.checked)
+        musc.push(muscle.value);
 
     const excersise: Excersise = {
       title: this.excersiseForm.value.title as string,
       desc: this.excersiseForm.value.desc as string,
       type: this.excersiseForm.value.type as string,
       equipment: arr,
+      muscles: musc,
       visibility: this.excersiseForm.value.visibility as string,
       videoTimeStamp: this.excersiseForm.value.videoTimeStamp as string,
       videoLink: this.excersiseForm.value.videoLink as string,
