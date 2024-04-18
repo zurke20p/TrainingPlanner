@@ -6,6 +6,7 @@ const excersiseSchema = new mongoose.Schema({
     desc: { type: String, require: true, unique: false },
     type: { type: String, require: true, unique: false },
     equipment: { type: String, require: true, unique: false },
+    muscles: { type: Array, require: true, unique: false },
     visibility: { type: String, require: true, unique: false },
     videoType: {type: String, require: true, unique: false},
     videoTimeStamp: {type: Number, require: true, unique: false},

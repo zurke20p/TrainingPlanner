@@ -47,7 +47,6 @@
             <option ngValue="protected">Protected</option>
         </select>
     </div>
+    <app-muscle-scheme (changedMuscleEvent)="receiveMuscles($event)"></app-muscle-scheme>
     <button type="submit">SUBMIT</button>
 </form>
-
-<app-muscle-scheme (changedMuscleEvent)="receiveMuscles($event)"></app-muscle-scheme>
