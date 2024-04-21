@@ -66,7 +66,7 @@ Your Best personal Gym Trainer!!!`;
         if(await utility.authenticate(req))
             return res.json({ status: 'err', msg: "User is already logged in." });
         if(!req.body.username || !req.body.password)
-            return res.json({ status: 'err', msg: 0 });
+            return res.json({ status: 'err', msg: "Username or password empty" });
     
         if(!await userFunctions.exists({ username: req.body.username }))
             return res.json({ status: 'err', msg: "Username doesn't exist." });
