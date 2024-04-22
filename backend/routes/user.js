@@ -29,10 +29,10 @@ module.exports = (app) =>
             return res.json({ status: 'err', msg: 5 });
     
         if(await userFunctions.exists({ username: req.body.username }))
-            return res.json({ status: 'err', msg: 6 });
+            return res.json({ status: 'err', msg: "Username already taken." });
 
         if(await userFunctions.exists({ mail: req.body.mail }))
-            return res.json({ status: 'err', msg: 7 });
+            return res.json({ status: 'err', msg: "Mail already taken." });
         
         const user = userFunctions.createUser(parseInt(Date.now()), req.body.username, req.body.mail, req.body.password);
 

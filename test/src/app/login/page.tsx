@@ -8,7 +8,6 @@ export default function Home(){
         event.preventDefault();
 
         const formData = new FormData(event.currentTarget);
-        console.log(formData.get("username"))
 
         const user: User = {
             username: formData.get("username") as string,
