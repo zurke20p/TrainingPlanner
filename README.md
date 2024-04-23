@@ -1,1 +1,28 @@
 # TrainingPlanner
+
+### Opis:
+Aplikacja tworząca plan treningowy i służąca do monitorowania postępów.
+
+### Założenia:
+- Logowanie/Rejestracja itp. związane z kontem użytkownika.
+- Dodawanie znajomych i przeglądanie ich profili.
+- Tworzenie ćwiczeń, z których mogą korzystać inni użytkownicy. Użytkownik wybiera rodzaj ćwiczenia (np. cardio, siłowe), grupe mięśni na jakie ćwiczenie oddziałuje, czy ćwiczenie będzie widoczne tylko dla znajomych/do użytku własnego czy widoczne publicznie, opcjonalna możliwość dołączenia filmu z instrukcjami.
+- Działanie na ćwiczeniach - dodawanie do ulubionych, edytowanie, zapisywanie w planach treningowych.
+- Możliwość ćwiczenia z planem treningowym, lub bez.
+- Zapisywanie własnego postępu, lub też znajomych. (np. ilość przebiegniętych km, osiągniecia itp.)
+- Różne wykresy pokazujące progres użytkownika.
+
+### Jak uruchomić:
+a) PIERWSZY TERMINAL
+1. cd backend
+2. npm i
+3. npm start
+b) DRUGI TERMINAL
+1. cd frontend
+2. npm i
+3. npm run dev
+
+https://codesandbox.io/p/github/Stefankow20p/TrainingPlanner/main?import=true&layout=%257B%2522sidebarPanel%2522%253A%2522EXPLORER%2522%252C%2522rootPanelGroup%2522%253A%257B%2522direction%2522%253A%2522horizontal%2522%252C%2522contentType%2522%253A%2522UNKNOWN%2522%252C%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522id%2522%253A%2522ROOT_LAYOUT%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522contentType%2522%253A%2522UNKNOWN%2522%252C%2522direction%2522%253A%2522vertical%2522%252C%2522id%2522%253A%2522clvc41c2o0006356jzrvdrwrd%2522%252C%2522sizes%2522%253A%255B60%252C40%255D%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522contentType%2522%253A%2522EDITOR%2522%252C%2522direction%2522%253A%2522horizontal%2522%252C%2522id%2522%253A%2522EDITOR%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL%2522%252C%2522contentType%2522%253A%2522EDITOR%2522%252C%2522id%2522%253A%2522clvc41c2o0002356jh3y9pors%2522%257D%255D%257D%252C%257B%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522contentType%2522%253A%2522SHELLS%2522%252C%2522direction%2522%253A%2522horizontal%2522%252C%2522id%2522%253A%2522SHELLS%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL%2522%252C%2522contentType%2522%253A%2522SHELLS%2522%252C%2522id%2522%253A%2522clvc41c2o0004356jma7mcz3q%2522%257D%255D%252C%2522sizes%2522%253A%255B100%255D%257D%255D%257D%252C%257B%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522contentType%2522%253A%2522DEVTOOLS%2522%252C%2522direction%2522%253A%2522vertical%2522%252C%2522id%2522%253A%2522DEVTOOLS%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL%2522%252C%2522contentType%2522%253A%2522DEVTOOLS%2522%252C%2522id%2522%253A%2522clvc41c2o0005356jzraqjb4u%2522%257D%255D%252C%2522sizes%2522%253A%255B100%255D%257D%255D%252C%2522sizes%2522%253A%255B50%252C50%255D%257D%252C%2522tabbedPanels%2522%253A%257B%2522clvc41c2o0002356jh3y9pors%2522%253A%257B%2522tabs%2522%253A%255B%257B%2522id%2522%253A%2522clvc41c2o0001356j7jf0jeab%2522%252C%2522mode%2522%253A%2522permanent%2522%252C%2522type%2522%253A%2522FILE%2522%252C%2522filepath%2522%253A%2522%252FREADME.md%2522%257D%255D%252C%2522id%2522%253A%2522clvc41c2o0002356jh3y9pors%2522%252C%2522activeTabId%2522%253A%2522clvc41c2o0001356j7jf0jeab%2522%257D%252C%2522clvc41c2o0005356jzraqjb4u%2522%253A%257B%2522id%2522%253A%2522clvc41c2o0005356jzraqjb4u%2522%252C%2522activeTabId%2522%253A%2522clvc42nf800el356jkwbwkxyi%2522%252C%2522tabs%2522%253A%255B%257B%2522type%2522%253A%2522UNASSIGNED_PORT%2522%252C%2522port%2522%253A2222%252C%2522id%2522%253A%2522clvc41m8m005q356jf64w9rvz%2522%252C%2522mode%2522%253A%2522permanent%2522%252C%2522path%2522%253A%2522%252F%2522%257D%252C%257B%2522type%2522%253A%2522UNASSIGNED_PORT%2522%252C%2522port%2522%253A8000%252C%2522id%2522%253A%2522clvc42nf800el356jkwbwkxyi%2522%252C%2522mode%2522%253A%2522permanent%2522%252C%2522path%2522%253A%2522%2522%257D%255D%257D%252C%2522clvc41c2o0004356jma7mcz3q%2522%253A%257B%2522id%2522%253A%2522clvc41c2o0004356jma7mcz3q%2522%252C%2522activeTabId%2522%253A%2522clvc423l2009u356j14h444lx%2522%252C%2522tabs%2522%253A%255B%257B%2522id%2522%253A%2522clvc41c2o0003356jzagh55zr%2522%252C%2522mode%2522%253A%2522permanent%2522%252C%2522type%2522%253A%2522TERMINAL%2522%252C%2522shellId%2522%253A%2522clvc41cfj003yddfo9c9o4zsr%2522%257D%252C%257B%2522id%2522%253A%2522clvc423l2009u356j14h444lx%2522%252C%2522mode%2522%253A%2522permanent%2522%252C%2522type%2522%253A%2522TERMINAL%2522%252C%2522shellId%2522%253A%2522clvc422q40044ddfobnpeapee%2522%257D%255D%257D%257D%252C%2522showDevtools%2522%253Atrue%252C%2522showShells%2522%253Atrue%252C%2522showSidebar%2522%253Atrue%252C%2522sidebarPanelSize%2522%253A15%257D
+
+### CO PLANUJEMY:
+Zmienić stronę na aplikację mobilną - nie korzystać już z reacta ani angulara. Aktualny projekt jest tylko pokazowy i będzie zmieniony całkowicie.

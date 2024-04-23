@@ -1,62 +1,36 @@
-.DS_STORE
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-/dist/
-/bazel-out
-/integration/bazel/bazel-*
-*.log
-/node_modules/
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
 
-# CircleCI temporary file for cache key computation.
-# See `save_month_to_file` in `.circleci/config.yml`.
-month.txt
+# testing
+/coverage
 
-# Include when developing application packages.
-pubspec.lock
-.c9
-.idea/
-.devcontainer/*
-!.devcontainer/README.md
-!.devcontainer/recommended-devcontainer.json
-!.devcontainer/recommended-Dockerfile
-.settings/
-.vscode/launch.json
-.vscode/settings.json
-.vscode/tasks.json
-*.swo
-*.swp
-modules/.settings
-modules/.vscode
-.vimrc
-.nvimrc
+# next.js
+/.next/
+/out/
 
-# Don't check in secret files
-*secret.js
+# production
+/build
 
-# Ignore npm/yarn debug log
-npm-debug.log
-yarn-error.log
+# misc
+.DS_Store
+*.pem
 
-# build-analytics
-.build-analytics
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# rollup-test output
-/modules/rollup-test/dist/
+# local env files
+.env*.local
 
-# User specific bazel settings
-.bazelrc.user
+# vercel
+.vercel
 
-# User specific ng-dev settings
-.ng-dev.user*
-
-.notes.md
-baseline.json
-
-# Ignore .history for the xyz.local-history VSCode extension
-.history
-
-# Husky
-.husky/_
-aio/content/examples/.DS_Store
-
-# Ignore cache created with the Angular CLI.
-.angular/
+# typescript
+*.tsbuildinfo
+next-env.d.ts

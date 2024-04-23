@@ -4,7 +4,7 @@ import { User } from '../interfaces/user';
 import { Excersise } from '../interfaces/excersise';
 
 const ServerRequestService = () => {
-  const link = "http://localhost:8000";
+  const link = "https://dlmc73-8000.csb.app";
 
   const makeRequest = async (method: string, endpoint: string, data = {}) => {
     const response = await fetch(`${link}${endpoint}`, {
